@@ -67,14 +67,22 @@ async function handleMessage(senderPsid, receivedMessage) {
   let response;
 
   if (receivedMessage.text) {
-    const msg =
-      receivedMessage.text.toLowerCase() === "niedziela"
-        ? handleQuestionAboutWorkingSunday(new Date())
-        : "nie rozumiem cię jeszcze, wybacz człowieku";
+    const defaultMessage = `
+      nie rozumiem jeszcze tego, co napisałeś, wybacz człowieku. \nspróbuj wpisać samo "niedziela" (bez ciapków), to ci przynajmniej powiem, czy handlowa czy nie
+    `;
+    let msg = "";
+    const typedText = receivedMessage.text.toLowerCase();
+    const siemki = ["cześć", "czesc", "elo", "siema"];
 
-    response = {
-      text: msg
-    };
+    if (siemki.includes(typedText)) {
+      msg = "gitara siema";
+    } else if (typedText === "niedziela") {
+      msg = handleQuestionAboutWorkingSunday(new Date());
+    } else {
+      msg = defaultMessage;
+    }
+
+    response = { text: msg };
   }
 
   await callSendAPI(senderPsid, response);
