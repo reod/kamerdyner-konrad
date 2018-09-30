@@ -104,6 +104,6 @@ async function callSendAPI(senderPsid, response) {
     const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
     await axios.post(url, request_body);
   } catch (e) {
-    console.error("Unable to send message:" + err);
+    console.error("Unable to send message:" + e);
   }
 }
