@@ -1,15 +1,15 @@
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
-import axios from "axios";
 
-import { handleQuestionAboutWorkingSunday } from "./use-case/working-sunday/working-sunday";
+
+import { handleMessage } from './request/handle-message';
+import { handlePostback } from './request/handle-postback';
 
 const app = new Koa();
 const router = new Router();
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 router.get("/", async (ctx, next) => {
   ctx.body = "nothing to see here";
@@ -39,9 +39,7 @@ router.post("/webhook", async (ctx, next) => {
 });
 
 router.get("/webhook", (ctx, next) => {
-  const mode = ctx.query["hub.mode"];
-  const token = ctx.query["hub.verify_token"];
-  const challenge = ctx.query["hub.challenge"];
+  const { mode, token, challenge } = ctx.query;
 
   if (mode && token) {
     if (mode === "subscribe" && token === VERIFY_TOKEN) {
@@ -58,52 +56,6 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(port, () => {
-  console.log(`app listening on ${port}`);
+app.listen(PORT, () => {
+  console.log(`app listening on ${PORT}`);
 });
-
-// Handles messages events
-async function handleMessage(senderPsid, receivedMessage) {
-  let response;
-
-  if (receivedMessage.text) {
-    const defaultMessage = `
-      nie rozumiem jeszcze tego, co napisałeś, wybacz człowieku. \nspróbuj wpisać samo "niedziela" (bez ciapków), to ci przynajmniej powiem, czy handlowa czy nie
-    `;
-    let msg = "";
-    const typedText = receivedMessage.text.toLowerCase();
-    const siemki = ["cześć", "czesc", "elo", "siema"];
-
-    if (siemki.includes(typedText)) {
-      msg = "gitara siema";
-    } else if (typedText === "niedziela") {
-      msg = handleQuestionAboutWorkingSunday(new Date());
-    } else {
-      msg = defaultMessage;
-    }
-
-    response = { text: msg };
-  }
-
-  await callSendAPI(senderPsid, response);
-}
-
-async function handlePostback(senderPsid, receivedPostback) {
-  console.log("handling postback not implemented", receivedPostback);
-}
-
-async function callSendAPI(senderPsid, response) {
-  let request_body = {
-    recipient: {
-      id: senderPsid
-    },
-    message: response
-  };
-
-  try {
-    const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
-    await axios.post(url, request_body);
-  } catch (e) {
-    console.error("Unable to send message:" + e);
-  }
-}
