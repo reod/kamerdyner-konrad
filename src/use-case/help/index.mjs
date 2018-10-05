@@ -27,5 +27,5 @@ function execute(message) {
     })
     .join('\n');
 
-  return `dostępne komendy to: ${commands}`;
+  return `dostępne komendy to: \n ${commands}`;
 }
