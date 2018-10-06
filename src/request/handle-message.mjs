@@ -1,5 +1,5 @@
 import { callSendAPI } from "./../api/api-client";
-import { normalise } from './normalise-input';
+import { normalise } from "./normalise-input";
 import { handlers } from "./../di/index";
 
 export async function handleMessage(senderPsid, receivedMessage) {

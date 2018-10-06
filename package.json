@@ -7,8 +7,8 @@
   "description": "Osobisty asystent na facebookowym messengerze",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
-    "format": "prettier --write src/**/*.mjs",
+    "test": "node --experimental-modules src/use-case/olowianka-gate/get-status.spec.mjs",
+    "format": "prettier --write \"src/**/*.mjs\"",
     "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules src/index.mjs",
     "start": "node --experimental-modules src/index.mjs"
   },
@@ -31,6 +31,7 @@
   "devDependencies": {
     "dotenv": "6.0.0",
     "nodemon": "1.18.4",
-    "prettier": "1.14.3"
+    "prettier": "1.14.3",
+    "tape": "4.9.1"
   }
 }

@@ -2,9 +2,8 @@ import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 
-
-import { handleMessage } from './request/handle-message';
-import { handlePostback } from './request/handle-postback';
+import { handleMessage } from "./request/handle-message";
+import { handlePostback } from "./request/handle-postback";
 
 const app = new Koa();
 const router = new Router();

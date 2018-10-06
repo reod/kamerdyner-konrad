@@ -6,12 +6,9 @@ export default {
   hideFromHelp: true
 };
 
-function getName() {
-}
+function getName() {}
 
-function getManual() {
-
-}
+function getManual() {}
 
 function canHandleMessage(message) {
   return true;
@@ -19,4 +16,4 @@ function canHandleMessage(message) {
 
 function execute(message) {
   return `nie rozumiem ${message}; wspisz "pomoc" (bez ciapków)`;
-};
+}

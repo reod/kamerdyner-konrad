@@ -1,22 +1,22 @@
-import { handlers } from './../../di';
+import { handlers } from "./../../di";
 
 export default {
   getName,
   getManual,
   canHandleMessage,
-  execute,
+  execute
 };
 
 function getName() {
-  return 'pomoc';
+  return "pomoc";
 }
 
 function getManual() {
-  return 'wyświetl listę dostępnych komend (tę, którą właśnie czytasz ;)';
+  return "wyświetl listę dostępnych komend (tę, którą właśnie czytasz ;)";
 }
 
 function canHandleMessage(message) {
-  return ['pomoc', 'help'].includes(message);
+  return ["pomoc", "help"].some(keyWord => message.includes(keyWord));
 }
 
 function execute(message) {
@@ -25,7 +25,7 @@ function execute(message) {
     .map(handler => {
       return `- ${handler.getName()} - ${handler.getManual()}`;
     })
-    .join('\n');
+    .join("\n");
 
   return `dostępne komendy to: \n ${commands}`;
 }
