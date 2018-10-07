@@ -3,8 +3,7 @@ import {
   displayDownHours,
   isDownPeriod,
   getDownTimeLeft,
-  getUpTimeLeft,
-  getGateStatus
+  getUpTimeLeft
 } from "./gate-status";
 
 import test from "tape";

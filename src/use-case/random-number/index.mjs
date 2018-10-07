@@ -1,3 +1,5 @@
+import { getRandomNumberFromRange } from "./random";
+
 export default {
   getName,
   getManual,
@@ -10,7 +12,7 @@ function getName() {
 }
 
 function getManual() {
-  return "losowa liczba (0 - 100)";
+  return "losowa liczba, domyślnie od 0 do 100; wpisz 'losuj N K' aby wylosować z przedziału od N do K";
 }
 
 function canHandleMessage(message) {
@@ -18,6 +20,11 @@ function canHandleMessage(message) {
 }
 
 function execute(message) {
-  // TODO: from - to
-  return Math.floor(Math.random() * 100);
+  const [, min, max] = message.split(" ");
+
+  if (min && max) {
+    return getRandomNumberFromRange(Number(min), Number(max));
+  }
+
+  return getRandomNumberFromRange(0, 100);
 }

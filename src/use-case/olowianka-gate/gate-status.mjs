@@ -1,4 +1,5 @@
 import { createDateFromHM, humaniseTimePeriod } from "./../../lib/date-utils";
+import { appendLeadingZero } from "./../../lib/string-utils";
 
 export function getGateStatus(date = new Date()) {
   let statusMessage = "kładka jest";
@@ -22,7 +23,6 @@ export function getGateStatus(date = new Date()) {
 
 export function getDownTimeLeft(date) {
   const wantedPeriod = getDownPeriods(date).find(dateInPeriod.bind(null, date));
-
   const timeLeft = wantedPeriod.endDate - date;
 
   return timeLeft;
@@ -127,11 +127,4 @@ export function formatPeriodDate(date) {
   const minutes = appendLeadingZero(date.getMinutes());
 
   return `${hours}:${minutes}`;
-}
-
-function appendLeadingZero(n) {
-  const str = String(n);
-  const withLeadingZero = str.length === 1 ? `0${n}` : str;
-
-  return withLeadingZero;
 }
