@@ -11,7 +11,7 @@ export async function handleMessage(senderPsid, receivedMessage) {
   if (command) {
     for (let i = 0; i < handlers.length; i++) {
       if (handlers[i].canHandleMessage(command)) {
-        msg = handlers[i].execute(command);
+        msg = await handlers[i].execute(command);
         break;
       }
     }

@@ -4,12 +4,14 @@ import coinToss from "./../use-case/coin-toss";
 import randomNumber from "./../use-case/random-number";
 import olowiankaGate from "./../use-case/olowianka-gate";
 import unknownCommand from "./../use-case/unknown-command";
+import randomDog from "./../use-case/random-dog";
 
 export const handlers = [
-  help,
   workingSunday,
   coinToss,
   randomNumber,
   olowiankaGate,
+  randomDog,
+  help,
   unknownCommand
 ];
