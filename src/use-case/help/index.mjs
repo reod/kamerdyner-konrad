@@ -1,31 +1,26 @@
-import { handlers } from "./../../di";
+export default function helpUseCaseFactory(handlers) {
+  return {
+    getName() {
+      return "pomoc";
+    },
 
-export default {
-  getName,
-  getManual,
-  canHandleMessage,
-  execute
-};
+    getManual() {
+      return "wyświetl listę dostępnych komend (tę, którą właśnie czytasz ;)";
+    },
 
-function getName() {
-  return "pomoc";
-}
+    canHandleMessage(message) {
+      return ["pomoc", "help"].some(keyWord => message.includes(keyWord));
+    },
 
-function getManual() {
-  return "wyświetl listę dostępnych komend (tę, którą właśnie czytasz ;)";
-}
+    execute(message) {
+      const commands = handlers
+        .filter(handler => !handler.hideFromHelp)
+        .map(handler => {
+          return `- ${handler.getName()} - ${handler.getManual()}`;
+        })
+        .join("\n");
 
-function canHandleMessage(message) {
-  return ["pomoc", "help"].some(keyWord => message.includes(keyWord));
-}
-
-function execute(message) {
-  const commands = handlers
-    .filter(handler => !handler.hideFromHelp)
-    .map(handler => {
-      return `- ${handler.getName()} - ${handler.getManual()}`;
-    })
-    .join("\n");
-
-  return `dostępne komendy to: \n ${commands}`;
+      return `dostępne komendy to: \n ${commands}`;
+    }
+  };
 }

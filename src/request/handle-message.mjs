@@ -1,23 +1,23 @@
-import { callSendAPI } from "./../api/api-client";
 import { normalise } from "./normalise-input";
-import { handlers } from "./../di/index";
 
-export async function handleMessage(senderPsid, receivedMessage) {
-  const command = normalise(receivedMessage.text);
+export function createMessageHandler({ handlers, fbGraphClient }) {
+  return async function handleMessage(senderPsid, receivedMessage) {
+    const command = normalise(receivedMessage.text);
 
-  let response;
-  let msg = "";
+    let response;
+    let msg = "";
 
-  if (command) {
-    for (let i = 0; i < handlers.length; i++) {
-      if (handlers[i].canHandleMessage(command)) {
-        msg = await handlers[i].execute(command);
-        break;
+    if (command) {
+      for (let i = 0; i < handlers.length; i++) {
+        if (handlers[i].canHandleMessage(command)) {
+          msg = await handlers[i].execute(command);
+          break;
+        }
       }
+
+      response = { text: msg };
     }
 
-    response = { text: msg };
-  }
-
-  await callSendAPI(senderPsid, response);
+    await fbGraphClient.sendMessage(senderPsid, response);
+  };
 }

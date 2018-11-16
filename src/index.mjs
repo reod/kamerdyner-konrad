@@ -1,19 +1,18 @@
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
-import sentry from '@sentry/node';
+import sentry from "@sentry/node";
 import errorHandler from "./response/error-handler";
-import { handleMessage } from "./request/handle-message";
-import { handlePostback } from "./request/handle-postback";
-
+import di from "./di";
 
 sentry.init({ dsn: process.env.SENTRY_DSN });
+
+const { handleMessage, handlePostback } = di;
 
 const app = new Koa();
 const router = new Router();
 const PORT = process.env.PORT || 4000;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-
 
 router.get("/", async (ctx, next) => {
   ctx.body = "nothing to see here";
@@ -63,7 +62,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.on('error', (err, ctx) => {
+app.on("error", (err, ctx) => {
   sentry.captureException(err);
   console.log(err);
 });
