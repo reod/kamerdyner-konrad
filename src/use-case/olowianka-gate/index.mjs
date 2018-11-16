@@ -16,7 +16,6 @@ function getManual() {
 }
 
 function canHandleMessage(message) {
-  console.log("mes", message);
   return ["kładka", "kladka"].some(keyWord => message.includes(keyWord));
 }
 
