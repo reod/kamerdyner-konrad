@@ -7,7 +7,7 @@
   "description": "Osobisty asystent na facebookowym messengerze",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-modules src/use-case/olowianka-gate/get-status.spec.mjs",
+    "test": "node --experimental-modules src/use-case/olowianka-gate/get-status.spec.mjs && node --experimental-modules src/use-case/working-sunday/working-sunday.spec.mjs",
     "format": "prettier --write \"src/**/*.mjs\"",
     "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules server.mjs",
     "start": "node --experimental-modules server.mjs"

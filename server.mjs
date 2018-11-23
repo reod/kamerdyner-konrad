@@ -15,7 +15,6 @@ const {
 
 sentry.init({ dsn: process.env.SENTRY_DSN });
 
-
 const app = createApp({
   landingController,
   getWebhookController,

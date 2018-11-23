@@ -7,9 +7,11 @@ import unknownCommand from './../src/use-case/unknown-command';
 import randomDog from './../src/use-case/random-dog';
 import axios from 'axios';
 import sentry from '@sentry/node';
-
 import landingController from './../src/request/landing-controller.mjs';
-import { createErrorHandler, createOnErrorListener } from './../src/request/error-handler.mjs';
+import {
+  createErrorHandler,
+  createOnErrorListener
+} from './../src/request/error-handler.mjs';
 import { createFacebookGraphClient } from './../src/lib/facebook-graph/facebook-graph';
 import { createMessageHandler } from './../src/request/handle-message';
 import createPostWebhookController from '../src/request/post-webhook-controller.mjs';
@@ -41,6 +43,7 @@ const postWebhookController = createPostWebhookController({
   handleMessage,
   handlePostback
 });
+
 const errorHandler = createErrorHandler({ errorReporter: sentry });
 
 const onErrorListener = createOnErrorListener({ errorReporter: sentry });
