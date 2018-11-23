@@ -9,8 +9,8 @@
   "scripts": {
     "test": "node --experimental-modules src/use-case/olowianka-gate/get-status.spec.mjs",
     "format": "prettier --write \"src/**/*.mjs\"",
-    "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules src/index.mjs",
-    "start": "node --experimental-modules src/index.mjs"
+    "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules server.mjs",
+    "start": "node --experimental-modules server.mjs"
   },
   "repository": {
     "type": "git",
