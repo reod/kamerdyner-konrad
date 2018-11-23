@@ -12,7 +12,7 @@ export function createErrorHandler({ errorReporter }) {
 
 export function createOnErrorListener({ errorReporter }) {
   return (err, ctx) => {
-    sentry.captureException(err);
+    errorReporter.captureException(err);
     console.log(err);
   };
 }

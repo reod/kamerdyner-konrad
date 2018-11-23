@@ -17,13 +17,18 @@ import { createMessageHandler } from './../src/request/handle-message';
 import createPostWebhookController from '../src/request/post-webhook-controller.mjs';
 import getWebhookController from '../src/request/get-webhook-controller';
 import { handlePostback } from './../src/request/handle-postback';
+import createVersionUseCase from './../src/use-case/version';
+import packageJson from './../package';
+
+const version = createVersionUseCase({ version: packageJson.version });
 
 const handlers = [
   workingSunday,
   coinToss,
   randomNumber,
   olowiankaGate,
-  randomDog
+  randomDog,
+  version
 ];
 
 handlers.push(helpUseCaseFactory(handlers));
