@@ -3,7 +3,8 @@ export default function createVersionUseCase({ version }) {
     getName,
     getManual,
     canHandleMessage,
-    execute
+    execute,
+    hideFromHelp: true
   };
 
   function getName() {
