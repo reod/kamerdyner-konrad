@@ -32,7 +32,7 @@
   "devDependencies": {
     "dotenv": "6.0.0",
     "nodemon": "1.18.4",
-    "prettier": "1.14.3",
+    "prettier": "^1.15.3",
     "tape": "4.9.1"
   }
 }
