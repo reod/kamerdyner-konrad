@@ -12,7 +12,7 @@ import {
   createErrorHandler,
   createOnErrorListener
 } from './../src/request/error-handler.mjs';
-import { createFacebookGraphClient } from './../src/lib/facebook-graph/facebook-graph';
+import { createFacebookGraphClient } from './../lib/facebook-graph/facebook-graph';
 import { createMessageHandler } from './../src/request/handle-message';
 import createPostWebhookController from '../src/request/post-webhook-controller.mjs';
 import getWebhookController from '../src/request/get-webhook-controller';

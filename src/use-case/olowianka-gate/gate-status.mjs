@@ -1,5 +1,8 @@
-import { createDateFromHM, humaniseTimePeriod } from "./../../lib/date-utils";
-import { appendLeadingZero } from "./../../lib/string-utils";
+import {
+  createDateFromHM,
+  humaniseTimePeriod
+} from "./../../../lib/date-utils";
+import { appendLeadingZero } from "./../../../lib/string-utils";
 
 export function getGateStatus(date = new Date()) {
   let statusMessage = "kładka jest";

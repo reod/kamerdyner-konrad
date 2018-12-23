@@ -7,7 +7,7 @@
   "description": "Osobisty asystent na facebookowym messengerze",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-modules src/use-case/olowianka-gate/get-status.spec.mjs && node --experimental-modules src/use-case/working-sunday/working-sunday.spec.mjs",
+    "test": "tape -r @std/esm src/**/*.spec.mjs",
     "format": "prettier --write \"src/**/*.mjs\"",
     "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules server.mjs",
     "start": "node --experimental-modules server.mjs"
@@ -30,9 +30,10 @@
     "koa-router": "7.4.0"
   },
   "devDependencies": {
+    "@std/esm": "0.26.0",
     "dotenv": "6.0.0",
     "nodemon": "1.18.4",
-    "prettier": "^1.15.3",
+    "prettier": "1.14.3",
     "tape": "4.9.1"
   }
 }

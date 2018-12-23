@@ -8,15 +8,15 @@ export default function createVersionUseCase({ version }) {
   };
 
   function getName() {
-    return 'wersja';
+    return "wersja";
   }
 
   function getManual() {
-    return 'wyświetla wersje aplikacji';
+    return "wyświetla wersje aplikacji";
   }
 
   function canHandleMessage(message) {
-    return ['wersja'].some(keyWord => message.includes(keyWord));
+    return ["wersja"].some(keyWord => message.includes(keyWord));
   }
 
   function execute(message) {
