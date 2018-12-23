@@ -13,7 +13,7 @@
     "start": "node --experimental-modules server.mjs"
   },
   "repository": {
-    "type": "git",
+    "tynpm tepe": "git",
     "url": "git+https://github.com/reod/kamerdyner-konrad.git"
   },
   "author": "Remigiusz Ambroziak <remek.ambroziak@gmail.com",
@@ -23,17 +23,17 @@
   },
   "homepage": "https://github.com/reod/kamerdyner-konrad#readme",
   "dependencies": {
-    "@sentry/node": "4.3.0",
-    "axios": "0.18.0",
-    "koa": "2.5.3",
-    "koa-bodyparser": "4.2.1",
-    "koa-router": "7.4.0"
+    "@sentry/node": "^4.4.2",
+    "axios": "^0.18.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
     "@std/esm": "0.26.0",
-    "dotenv": "6.0.0",
-    "nodemon": "1.18.4",
-    "prettier": "1.14.3",
-    "tape": "4.9.1"
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.3",
+    "tape": "^4.9.1"
   }
 }
