@@ -1,3 +1,5 @@
+import workingSundays from "./working-sundays-by-year";
+
 export function handleQuestionAboutWorkingSunday(date = new Date()) {
   if (!isSunday(date)) {
     return `Dzisiaj nie jest niedziela. Za to najblisza jest ${getSundayLabel(
@@ -13,21 +15,17 @@ export function getSundayLabel(date) {
 }
 
 export function isWorkingSunday(date) {
-  const workingSundays = {
-    8: [2, 30],
-    9: [7, 28],
-    10: [4, 25],
-    11: [2, 16, 23, 30]
-  };
-
+  const year = date.getFullYear();
   const month = date.getMonth();
-  const day = date.getDate();
 
-  if (workingSundays[month]) {
-    return workingSundays[month].includes(day);
+  if (!workingSundays[year] || !workingSundays[year][month]) {
+    throw new Error("Unknown sunday.");
   }
 
-  return false;
+  const day = date.getDate();
+  const testedMonth = workingSundays[year][month];
+
+  return testedMonth.includes(day);
 }
 
 export function isSunday(date) {

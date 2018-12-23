@@ -7,19 +7,28 @@ import {
 } from "./working-sunday";
 
 test("isWorkingSunday", t => {
-  const dateOfWorkingSunday = new Date();
-  dateOfWorkingSunday.setFullYear(2018);
-  dateOfWorkingSunday.setMonth(10);
-  dateOfWorkingSunday.setDate(18);
-
-  t.equal(isWorkingSunday(dateOfWorkingSunday), false);
-
   const dateOfNotWorkingSunday = new Date();
   dateOfNotWorkingSunday.setFullYear(2018);
   dateOfNotWorkingSunday.setMonth(10);
-  dateOfNotWorkingSunday.setDate(25);
+  dateOfNotWorkingSunday.setDate(18);
 
-  t.equal(isWorkingSunday(dateOfNotWorkingSunday), true);
+  t.equal(isWorkingSunday(dateOfNotWorkingSunday), false);
+
+  const dateOfWorkingSunday = new Date();
+  dateOfWorkingSunday.setFullYear(2020);
+  dateOfWorkingSunday.setMonth(11);
+  dateOfWorkingSunday.setDate(13);
+
+  t.equal(isWorkingSunday(dateOfWorkingSunday), true);
+
+  const dateOfUnknownSunday = new Date();
+  dateOfUnknownSunday.setFullYear(2022);
+  dateOfUnknownSunday.setMonth(1);
+  dateOfUnknownSunday.setDate(2);
+
+  t.throws(() => {
+    isWorkingSunday(dateOfUnknownSunday);
+  }, /Unknown sunday/);
   t.end();
 });
 
