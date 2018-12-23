@@ -1,15 +1,15 @@
 {
   "name": "kamerdyner-konrad",
-  "version": "1.7.0",
+  "version": "1.9.0",
   "engines": {
     "node": "10.11.0"
   },
   "description": "Osobisty asystent na facebookowym messengerze",
   "main": "index.js",
   "scripts": {
-    "test": "tape -r @std/esm src/**/*.spec.mjs",
+    "test": "tape -r @std/esm */**/*.spec.mjs",
     "format": "prettier --write \"src/**/*.mjs\"",
-    "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules server.mjs",
+    "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules --inspect=9229 server.mjs",
     "start": "node --experimental-modules server.mjs"
   },
   "repository": {

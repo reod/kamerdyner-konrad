@@ -18,6 +18,6 @@ export function createMessageHandler({ handlers, fbGraphClient }) {
       response = { text: msg };
     }
 
-    await fbGraphClient.sendMessage(senderPsid, response);
+    return await fbGraphClient.sendMessage(senderPsid, response);
   };
 }

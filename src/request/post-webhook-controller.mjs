@@ -10,18 +10,20 @@ export default function createPostWebhookController({
       return;
     }
 
+    let response;
+
     for (let i = 0; i < body.entry.length; i++) {
       const webhookEvent = body.entry[i].messaging[0];
       const senderPsid = webhookEvent.sender.id;
 
       if (webhookEvent.message) {
-        await handleMessage(senderPsid, webhookEvent.message);
+        response = await handleMessage(senderPsid, webhookEvent.message);
       } else if (webhookEvent.postback) {
-        await handlePostback(senderPsid, webhookEvent.postback);
+        response = await handlePostback(senderPsid, webhookEvent.postback);
       }
     }
 
-    ctx.status = 200;
-    ctx.body = "EVENT_RECEIVED";
+    ctx.status = response.status;
+    ctx.body = response.config.data;
   };
 }
