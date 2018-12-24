@@ -3,6 +3,7 @@ import { normalise } from "./normalise-input";
 export function createMessageHandler({ handlers, fbGraphClient }) {
   return async function handleMessage(senderPsid, receivedMessage) {
     const command = normalise(receivedMessage.text);
+    console.log("handling new message: ", senderPsid, receivedMessage);
 
     let response;
     let msg = "";
