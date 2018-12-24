@@ -1,4 +1,4 @@
-export default function helpUseCaseFactory(handlers) {
+export default (handlers) => {
   return {
     getName() {
       return "pomoc";

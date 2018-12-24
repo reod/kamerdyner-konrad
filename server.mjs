@@ -1,12 +1,12 @@
 import sentry from '@sentry/node';
-import createApp from './src';
+import app from './src';
 import di from './di';
 
 const PORT = process.env.PORT;
 
 sentry.init({ dsn: process.env.SENTRY_DSN });
 
-const app = createApp({
+const appInstance = app({
   landingController: di.get('landingController'),
   getWebhookController: di.get('getWebhookController'),
   postWebhookController: di.get('postWebhookController'),
@@ -14,6 +14,6 @@ const app = createApp({
   onErrorListener: di.get('onErrorListener'),
 });
 
-app.listen(PORT, () => {
+appInstance.listen(PORT, () => {
   console.log(`app listening on ${PORT}`);
 });
