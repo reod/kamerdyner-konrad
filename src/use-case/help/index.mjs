@@ -1,4 +1,4 @@
-export default (handlers) => {
+export default handlers => {
   return {
     getName() {
       return "pomoc";
@@ -23,4 +23,4 @@ export default (handlers) => {
       return `dostępne komendy to: \n ${commands}`;
     }
   };
-}
+};

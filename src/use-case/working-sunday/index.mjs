@@ -16,7 +16,7 @@ function getManual() {
 }
 
 function canHandleMessage(message) {
-  return ["niedziela"].some(keyWord => message.includes(keyWord));
+  return message === "niedziela";
 }
 
 function execute(message) {
