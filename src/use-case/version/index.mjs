@@ -1,4 +1,4 @@
-export default function createVersionUseCase({ version }) {
+export default ({ version }) => {
   return {
     getName,
     getManual,
@@ -22,4 +22,4 @@ export default function createVersionUseCase({ version }) {
   function execute(message) {
     return version;
   }
-}
+};

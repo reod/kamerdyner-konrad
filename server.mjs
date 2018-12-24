@@ -2,25 +2,16 @@ import sentry from '@sentry/node';
 import createApp from './src';
 import di from './di';
 
-const dic = di[process.env.NODE_ENV];
 const PORT = process.env.PORT;
-
-const {
-  landingController,
-  getWebhookController,
-  postWebhookController,
-  onErrorListener,
-  errorHandler
-} = dic;
 
 sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = createApp({
-  landingController,
-  getWebhookController,
-  postWebhookController,
-  errorHandler,
-  onErrorListener
+  landingController: di.get('landingController'),
+  getWebhookController: di.get('getWebhookController'),
+  postWebhookController: di.get('postWebhookController'),
+  errorHandler: di.get('errorHandler'),
+  onErrorListener: di.get('onErrorListener'),
 });
 
 app.listen(PORT, () => {

@@ -1,28 +1,36 @@
-import helpUseCaseFactory from './../src/use-case/help';
-import workingSunday from './../src/use-case/working-sunday';
-import coinToss from './../src/use-case/coin-toss';
-import randomNumber from './../src/use-case/random-number';
-import olowiankaGate from './../src/use-case/olowianka-gate';
-import unknownCommand from './../src/use-case/unknown-command';
-import randomDog from './../src/use-case/random-dog';
-import axios from 'axios';
-import sentry from '@sentry/node';
-import landingController from './../src/request/landing-controller';
-import {
-  createErrorHandler,
-  createOnErrorListener
-} from './../src/request/error-handler.mjs';
-import { createFacebookGraphClient } from './../lib/facebook-graph/facebook-graph';
-import fakeFacebookGraph from './../lib/facebook-graph/fake-facebook-graph';
-import { createMessageHandler } from './../src/request/handle-message';
-import createPostWebhookController from '../src/request/post-webhook-controller';
-import getWebhookController from '../src/request/get-webhook-controller';
-import { handlePostback } from './../src/request/handle-postback';
-import createVersionUseCase from './../src/use-case/version';
-import holidays from './../src/use-case/holidays';
-import packageJson from './../package';
+import helpUseCaseFactory from "./../src/use-case/help";
+import workingSunday from "./../src/use-case/working-sunday";
+import coinToss from "./../src/use-case/coin-toss";
+import randomNumber from "./../src/use-case/random-number";
+import olowiankaGate from "./../src/use-case/olowianka-gate";
+import unknownCommand from "./../src/use-case/unknown-command";
+import randomDog from "./../src/use-case/random-dog";
+import axios from "axios";
+import sentry from "@sentry/node";
+import normaliseInput from "./../src/request/normalise-input";
+import landingController from "./../src/request/landing-controller";
+import errorHandler from "./../src/request/error-handler";
+import onErrorListener from "./../src/request/on-error-listener";
+import facebookGraphClient from "./../lib/facebook-graph/facebook-graph";
+import fakeFacebookGraph from "./../lib/facebook-graph/fake-facebook-graph";
+import handleMessage from "./../src/request/handle-message";
+import createPostWebhookController from "../src/request/post-webhook-controller";
+import getWebhookController from "../src/request/get-webhook-controller";
+import handlePostback from "./../src/request/handle-postback";
+import versionUseCase from "./../src/use-case/version";
+import holidays from "./../src/use-case/holidays";
+import packageJson from "./../package";
+import diContainer from "./di-container";
 
-const version = createVersionUseCase({ version: packageJson.version });
+const di = diContainer({
+  environment: process.env.NODE_ENV,
+  defaultEnvironment: "production",
+  environments: ["production", "development", "test"]
+});
+
+di.set({ normaliseInput });
+di.set({ landingController });
+di.set({ getWebhookController });
 
 const handlers = [
   workingSunday,
@@ -31,49 +39,41 @@ const handlers = [
   olowiankaGate,
   randomDog,
   holidays,
-  version
+  versionUseCase({ version: packageJson.version })
 ];
 
 handlers.push(helpUseCaseFactory(handlers));
 handlers.push(unknownCommand);
 
-const fbGraphClient = process.env.NODE_ENV === 'production' ? createFacebookGraphClient({
-  httpClient: axios,
-  pageAccessToken: process.env.PAGE_ACCESS_TOKEN
-}) : fakeFacebookGraph({
-  httpClient: axios,
-  pageAccessToken: process.env.PAGE_ACCESS_TOKEN
-})
+di.set({ handlers });
 
-const handleMessage = createMessageHandler({
-  handlers,
-  fbGraphClient
+di.set({
+  fbGraphClient: facebookGraphClient({
+    httpClient: axios,
+    pageAccessToken: process.env.PAGE_ACCESS_TOKEN
+  })
 });
+
+di.set({ fbGraphClient: fakeFacebookGraph() }, ["development", "test"]);
+
+di.set({
+  handleMessage: handleMessage({
+    handlers: di.get("handlers"),
+    fbGraphClient: di.get("fbGraphClient"),
+    normaliseInput: di.get("normaliseInput")
+  })
+});
+
+di.set({ handlePostback: handlePostback() });
 
 const postWebhookController = createPostWebhookController({
-  handleMessage,
-  handlePostback
+  handleMessage: di.get("handleMessage"),
+  handlePostback: di.get("handlePostback")
 });
 
-const errorHandler = createErrorHandler({ errorReporter: sentry });
+di.set({ postWebhookController });
 
-const onErrorListener = createOnErrorListener({ errorReporter: sentry });
+di.set({ errorHandler: errorHandler() });
+di.set({ onErrorListener: onErrorListener({ errorReporter: sentry }) });
 
-const container = {
-  landingController,
-  handleMessage,
-  handlePostback,
-  fbGraphClient,
-  getWebhookController,
-  postWebhookController,
-  onErrorListener,
-  errorHandler
-};
-
-
-
-export default {
-  development: { ...container, },
-  test: { ...container },
-  production: { ...container }
-};
+export default di;

@@ -1,8 +1,6 @@
-import { normalise } from "./normalise-input";
-
-export function createMessageHandler({ handlers, fbGraphClient }) {
-  return async function handleMessage(senderPsid, receivedMessage) {
-    const command = normalise(receivedMessage.text);
+export default ({ handlers, fbGraphClient, normaliseInput }) =>
+  async function handleMessage(senderPsid, receivedMessage) {
+    const command = normaliseInput(receivedMessage.text);
     console.log("handling new message: ", senderPsid, receivedMessage);
 
     let response;
@@ -21,4 +19,3 @@ export function createMessageHandler({ handlers, fbGraphClient }) {
 
     return await fbGraphClient.sendMessage(senderPsid, response);
   };
-}

@@ -1,5 +1,4 @@
-export function normalise(input) {
-  return String(input)
+export default input =>
+  String(input)
     .trim()
     .toLocaleLowerCase();
-}
