@@ -110,13 +110,12 @@ export function extractYearFromMessage(message) {
 export function getAdvancedManual() {
   return `święta - wypisuje listę świąt ruchomych w bieżącym roku
 święta [ROK] - wypisuje listę świąt ruchomych na dany rok
-święta wszystkie - wypisuje listę wszystkich świąt W biezacym roku
+święta wszystkie - wypisuje listę wszystkich świąt w bieżacym roku
 święta wszystkie [ROK] - wypisuje listę wszystkich świąt na dany rok
 [NAZWA_ŚWIĘTA] - wypisuje datę święta w bieżącym roku, wpisz np. 'wielkanoc'
-[NAZWA_ŚWIĘTA] [ROK] - wypisuje datę święta w bieżącym roku, wpisz np. 'boże ciało 2034'
-  `;
+[NAZWA_ŚWIĘTA] [ROK] - wypisuje datę święta w bieżącym roku, wpisz np. 'boże ciało 2034'`;
 }
 
 export function getHelplessnessMessage() {
-  return "niestety nie zrozumiałem. wpisz 'święta pomoc i postępuj zgodnie z instrukcją'";
+  return "niestety nie zrozumiałem. wpisz 'święta pomoc' i postępuj zgodnie z instrukcją";
 }
