@@ -182,7 +182,7 @@ export function getHolidayDateFormatted(holiday) {
 }
 
 export function formatHolidayList(holidayList) {
-  return holidayList.map(formatHoliday);
+  return holidayList.map(formatHoliday).join("\n");
 }
 
 export function getMovableHolidaysFormatted(year = new Date().getFullYear()) {
