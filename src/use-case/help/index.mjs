@@ -20,7 +20,7 @@ export default handlers => {
         })
         .join("\n");
 
-      return `dostępne komendy to: \n ${commands}`;
+      return `dostępne komendy to:\n${commands}`;
     }
   };
 };
