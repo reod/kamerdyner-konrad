@@ -13,10 +13,10 @@
     "start": "node --experimental-modules server.mjs"
   },
   "repository": {
-    "tynpm tepe": "git",
-    "url": "git+https://github.com/reod/kamerdyner-konrad.git"
+    "type": "git",
+    "url": "https://github.com/reod/kamerdyner-konrad.git"
   },
-  "author": "Remigiusz Ambroziak <remek.ambroziak@gmail.com",
+  "author": "Remigiusz Ambroziak <remek.ambroziak@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/reod/kamerdyner-konrad/issues"
