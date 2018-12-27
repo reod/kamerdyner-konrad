@@ -2,7 +2,7 @@
   "name": "kamerdyner-konrad",
   "version": "1.20.0",
   "engines": {
-    "node": "10.11.0"
+    "node": "11.6.0"
   },
   "description": "Osobisty asystent na facebookowym messengerze",
   "main": "index.js",
