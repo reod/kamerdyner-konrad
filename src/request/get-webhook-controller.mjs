@@ -1,5 +1,7 @@
-export default async (ctx, next) => {
-  const { mode, token, challenge } = ctx.query;
+export default ({ verifyToken }) => async (ctx, next) => {
+  const mode = ctx.query["hub.mode"];
+  const token = ctx.query["hub.verify_token"];
+  const challenge = ctx.query["hub.challenge"];
 
   if (mode && token) {
     if (mode === "subscribe" && token === verifyToken) {
@@ -8,5 +10,7 @@ export default async (ctx, next) => {
     } else {
       ctx.status = 403;
     }
+  } else {
+    await next();
   }
 };

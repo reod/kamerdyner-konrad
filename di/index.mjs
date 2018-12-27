@@ -33,7 +33,11 @@ const di = diContainer({
 
 di.set({ normaliseInput });
 di.set({ landingController });
-di.set({ getWebhookController });
+di.set({
+  getWebhookController: getWebhookController({
+    verifyToken: process.env.VERIFY_TOKEN
+  })
+});
 
 const handlers = [
   workingSundayUseCase,
