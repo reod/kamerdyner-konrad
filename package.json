@@ -9,7 +9,7 @@
   "scripts": {
     "test": "tape -r @std/esm */**/*.spec.mjs",
     "format": "prettier --write \"*/**/*.mjs\"",
-    "dev": "nodemon --exec \"node -r dotenv/config\" --experimental-modules --inspect=9229 server.mjs",
+    "dev": "nodemon --exec \"node -r dotenv/config\" --inspect --experimental-modules server.mjs",
     "start": "node --experimental-modules server.mjs"
   },
   "repository": {
