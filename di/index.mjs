@@ -2,6 +2,9 @@ import axios from "axios";
 import sentry from "@sentry/node";
 import packageJson from "./../package";
 
+import facebookGraphClient from "./../lib/facebook-graph/facebook-graph";
+import fakeFacebookGraph from "./../lib/facebook-graph/fake-facebook-graph";
+
 import helpUseCase from "./../src/use-case/help";
 import workingSundayUseCase from "./../src/use-case/working-sunday";
 import coinTossUseCase from "./../src/use-case/coin-toss";
@@ -12,16 +15,14 @@ import randomDogUseCase from "./../src/use-case/random-dog";
 import versionUseCase from "./../src/use-case/version";
 import holidaysUseCase from "./../src/use-case/holidays";
 
-import normaliseInput from "./../src/request/normalise-input";
-import landingController from "./../src/request/landing-controller";
-import errorHandler from "./../src/request/error-handler";
-import onErrorListener from "./../src/request/on-error-listener";
-import facebookGraphClient from "./../lib/facebook-graph/facebook-graph";
-import fakeFacebookGraph from "./../lib/facebook-graph/fake-facebook-graph";
-import handleMessage from "./../src/request/handle-message";
-import postWebhookController from "../src/request/post-webhook-controller";
-import getWebhookController from "../src/request/get-webhook-controller";
-import handlePostback from "./../src/request/handle-postback";
+import normaliseInput from "./../src/http/normalise-input";
+import landingController from "./../src/http/landing-controller";
+import errorHandler from "./../src/http/error-handler";
+import onErrorListener from "./../src/http/on-error-listener";
+import handleMessage from "./../src/http/handle-message";
+import postWebhookController from "../src/http/post-webhook-controller";
+import getWebhookController from "../src/http/get-webhook-controller";
+import handlePostback from "./../src/http/handle-postback";
 
 import diContainer from "./di-container";
 

@@ -13,6 +13,7 @@ export default ({ handlers, fbGraphClient, normaliseInput }) =>
           break;
         }
       }
+
       response = { text: msg };
     }
 
