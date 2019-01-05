@@ -5,19 +5,22 @@ import {
 import { appendLeadingZero } from "./../../../lib/string-utils";
 
 export function getGateStatus(date = new Date()) {
+  const downSeason = isDownSeason(date);
+  if (downSeason) {
+    return "o tej porze roku kładka jest opuszczona cały czas.";
+  }
+
   let statusMessage = "kładka jest";
   const isDown = isDownPeriod(date);
-  const downSeason = isDownSeason(date);
-  const status = isDown || downSeason ? "opuszczona" : "podniesiona";
+  const status = isDown ? "opuszczona" : "podniesiona";
 
   statusMessage += ` ${status}.`;
 
-  if (isDown && !downSeason) {
+  if (isDown) {
     const timeLeft = getDownTimeLeft(date);
     const minutesLeft = humaniseTimePeriod(timeLeft);
-
     statusMessage += ` masz jeszcze ${minutesLeft}.`;
-  } else if (!isDown) {
+  } else {
     const timeLeft = getUpTimeLeft(date);
     const minutesLeft = humaniseTimePeriod(timeLeft);
     statusMessage += ` otworzą za ${minutesLeft}.`;

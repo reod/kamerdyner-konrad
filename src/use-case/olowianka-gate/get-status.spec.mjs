@@ -4,7 +4,8 @@ import {
   isDownPeriod,
   getDownTimeLeft,
   getUpTimeLeft,
-  isDownSeason
+  isDownSeason,
+  getGateStatus
 } from "./gate-status";
 
 import test from "tape";
@@ -87,6 +88,35 @@ test("isDownSeason", t => {
   t.equal(isDownSeason(new Date(2019, 9, 31)), false);
   t.equal(isDownSeason(new Date(2019, 10, 1)), true);
   t.equal(isDownSeason(new Date(2019, 10, 2)), true);
+
+  t.end();
+});
+
+test("getGateStatus", t => {
+  t.equal(
+    getGateStatus(new Date(2019, 0, 10)),
+    "o tej porze roku kładka jest opuszczona cały czas."
+  );
+  t.equal(
+    getGateStatus(new Date(2019, 1, 28)),
+    "o tej porze roku kładka jest opuszczona cały czas."
+  );
+  t.equal(
+    getGateStatus(new Date(2019, 3, 1, 7, 35)),
+    "kładka jest opuszczona. masz jeszcze 25 minut."
+  );
+  t.equal(
+    getGateStatus(new Date(2019, 4, 2, 9, 15)),
+    "kładka jest podniesiona. otworzą za 15 minut."
+  );
+  t.equal(
+    getGateStatus(new Date(2019, 10, 1)),
+    "o tej porze roku kładka jest opuszczona cały czas."
+  );
+  t.equal(
+    getGateStatus(new Date(2019, 10, 2)),
+    "o tej porze roku kładka jest opuszczona cały czas."
+  );
 
   t.end();
 });
