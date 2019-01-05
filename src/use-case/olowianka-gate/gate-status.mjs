@@ -7,15 +7,17 @@ import { appendLeadingZero } from "./../../../lib/string-utils";
 export function getGateStatus(date = new Date()) {
   let statusMessage = "kładka jest";
   const isDown = isDownPeriod(date);
-  const status = isDown ? "opuszczona" : "podniesiona";
+  const downSeason = isDownSeason(date);
+  const status = isDown || downSeason ? "opuszczona" : "podniesiona";
 
   statusMessage += ` ${status}.`;
 
-  if (isDown) {
+  if (isDown && !downSeason) {
     const timeLeft = getDownTimeLeft(date);
     const minutesLeft = humaniseTimePeriod(timeLeft);
+
     statusMessage += ` masz jeszcze ${minutesLeft}.`;
-  } else {
+  } else if (!isDown) {
     const timeLeft = getUpTimeLeft(date);
     const minutesLeft = humaniseTimePeriod(timeLeft);
     statusMessage += ` otworzą za ${minutesLeft}.`;
@@ -130,4 +132,15 @@ export function formatPeriodDate(date) {
   const minutes = appendLeadingZero(date.getMinutes());
 
   return `${hours}:${minutes}`;
+}
+
+export function isDownSeason(date) {
+  const month = date.getMonth();
+
+  // 1 April - 31 October:
+  if (month < 3 || month > 9) {
+    return true;
+  }
+
+  return false;
 }

@@ -3,7 +3,8 @@ import {
   displayDownHours,
   isDownPeriod,
   getDownTimeLeft,
-  getUpTimeLeft
+  getUpTimeLeft,
+  isDownSeason
 } from "./gate-status";
 
 import test from "tape";
@@ -73,6 +74,19 @@ test("getUpTimeLeft", t => {
   const dateWithOneMinutesLeft = createDateFromHM(23, 29);
   const oneMinute = 1000 * 60 * 1;
   t.equal(getUpTimeLeft(dateWithOneMinutesLeft), oneMinute);
+
+  t.end();
+});
+
+test("isDownSeason", t => {
+  t.equal(isDownSeason(new Date(2019, 0, 10)), true);
+  t.equal(isDownSeason(new Date(2019, 1, 28)), true);
+  t.equal(isDownSeason(new Date(2019, 3, 1)), false);
+  t.equal(isDownSeason(new Date(2019, 5, 23)), false);
+  t.equal(isDownSeason(new Date(2019, 9, 31)), false);
+  t.equal(isDownSeason(new Date(2019, 9, 31)), false);
+  t.equal(isDownSeason(new Date(2019, 10, 1)), true);
+  t.equal(isDownSeason(new Date(2019, 10, 2)), true);
 
   t.end();
 });
