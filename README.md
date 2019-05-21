@@ -1,2 +1,2 @@
 # kamerdyner-konrad
-Personal assistance for FB messanger.
+Personal assistance for FB messenger.
