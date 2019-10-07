@@ -12,7 +12,9 @@
     "test:e2e": "export HOST=127.0.0.1; export PORT=9999; export NODE_ENV=test; tape -r @std/esm */**/*.e2e.mjs",
     "format": "prettier --write \"*/**/*.mjs\"",
     "dev": "nodemon --exec \"node -r dotenv/config\" --inspect --experimental-modules server.mjs",
-    "start": "node --experimental-modules server.mjs"
+    "start": "node --experimental-modules server.mjs",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,8 @@
     "axios": "^0.18.1",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "@std/esm": "0.26.0",
@@ -37,5 +40,6 @@
     "nodemon": "^1.18.4",
     "prettier": "^1.14.3",
     "tape": "^4.9.1"
-  }
+  },
+  "snyk": true
 }
