@@ -28,11 +28,12 @@
   "homepage": "https://github.com/reod/kamerdyner-konrad#readme",
   "dependencies": {
     "@sentry/node": "^4.4.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "snyk": "^1.161.1"
+    "snyk": "^1.230.5"
+
   },
   "devDependencies": {
     "@std/esm": "0.26.0",
