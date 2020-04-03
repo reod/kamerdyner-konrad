@@ -3,7 +3,7 @@ import workingSundays from "./working-sundays-by-year";
 export function handleQuestionAboutWorkingSunday(date = new Date()) {
   if (!isSunday(date)) {
     return `Dzisiaj nie jest niedziela. Za to najblisza jest ${getSundayLabel(
-      date
+      getNextSunday(date)
     )}`;
   }
 
