@@ -37,7 +37,7 @@
   "devDependencies": {
     "@std/esm": "0.26.0",
     "dotenv": "^6.0.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^2.0.20",
     "prettier": "^1.14.3",
     "tape": "^4.9.1"
   },
